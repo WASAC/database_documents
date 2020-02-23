@@ -13,7 +13,7 @@ You can follow the below methods to install it according to operation system.
 After installation, you can open `rwss_assets.dbm` to edit the diagram.
 
 ### for Windows users
-Please follow this ]instruction](https://github.com/apazga/docker-pgmodeler) to install pgmodeler.
+Please follow this [instruction](https://github.com/apazga/docker-pgmodeler) to install pgmodeler.
 
 ### for MacOS users
 Please follow this [instruction](https://github.com/GrindrodBank/pgmodeler-x11) to launch pgmodeler.
