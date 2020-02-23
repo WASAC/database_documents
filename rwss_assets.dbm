@@ -1,0 +1,2067 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.2-beta" last-position="0,0" last-zoom="0.5" max-obj-count="40"
+	 default-schema="public" default-owner="postgres">
+<database name="rwss_assets" encoding="UTF8" lc-collate="Japanese_Japan.932" lc-ctype="Japanese_Japan.932" is-template="false" allow-conns="true">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<tag name="BaseMap">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#4aa5ff,#4aa5ff,#20486f"/>
+</tag>
+<schema name="public" layer="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<extension name="postgis" cur-version="2.4.4">
+	<schema name="public"/>
+	<comment><![CDATA[PostGIS geometry, geography, and raster spatial types and functions]]></comment>
+</extension>
+
+<extension name="pgrouting" cur-version="2.6.0">
+	<schema name="public"/>
+	<comment><![CDATA[pgRouting Extension]]></comment>
+</extension>
+
+<schema name="topology" layer="0" rect-visible="true" fill-color="#04ac23">
+	<role name="postgres"/>
+	<comment><![CDATA[PostGIS Topology schema]]></comment>
+</schema>
+
+<extension name="postgis_topology" cur-version="2.4.4">
+	<schema name="topology"/>
+	<comment><![CDATA[PostGIS topology spatial types and functions]]></comment>
+</extension>
+
+<extension name="address_standardizer" cur-version="2.4.4">
+	<schema name="public"/>
+	<comment><![CDATA[Used to parse an address into constituent elements. Generally used to support geocoding address normalization step.]]></comment>
+</extension>
+
+<extension name="postgis_sfcgal" cur-version="2.4.4">
+	<schema name="public"/>
+	<comment><![CDATA[PostGIS SFCGAL functions]]></comment>
+</extension>
+
+<extension name="pointcloud" cur-version="1.1.0">
+	<schema name="public"/>
+	<comment><![CDATA[data type for lidar point clouds]]></comment>
+</extension>
+
+<extension name="pointcloud_postgis" cur-version="1.0">
+	<schema name="public"/>
+	<comment><![CDATA[integration for pointcloud LIDAR data and PostGIS geometry data]]></comment>
+</extension>
+
+<extension name="ogr_fdw" cur-version="1.0">
+	<schema name="public"/>
+	<comment><![CDATA[foreign-data wrapper for GIS data access]]></comment>
+</extension>
+
+<extension name="fuzzystrmatch" cur-version="1.1">
+	<schema name="public"/>
+	<comment><![CDATA[determine similarities and distance between strings]]></comment>
+</extension>
+
+<schema name="tiger" layer="0" rect-visible="true" fill-color="#5df445">
+	<role name="postgres"/>
+</schema>
+
+<extension name="postgis_tiger_geocoder" cur-version="2.4.4">
+	<schema name="tiger"/>
+	<comment><![CDATA[PostGIS tiger geocoder and reverse geocoder]]></comment>
+</extension>
+
+<table name="bookmarks" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="2740"/>
+	<column name="id" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="latlng" not-null="true">
+		<type name="double precision" length="0" dimension="1"/>
+	</column>
+	<column name="zoom" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="editable" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="removable" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="bookmarks_pkey" type="pk-constr" table="public.bookmarks">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="cell" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="800"/>
+	<column name="cell_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cell" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="prov_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dist_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sect_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="cell_pkey" type="pk-constr" table="public.cell">
+		<columns names="cell_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="contours_rw_id_0_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="contours_rw" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="820" y="2120"/>
+	<column name="id" not-null="true" sequence="public.contours_rw_id_0_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="contour">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="shape_leng">
+		<type name="double precision" length="0"/>
+	</column>
+	<constraint name="contours_rw_pkey" type="pk-constr" table="public.contours_rw">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="district" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="340"/>
+	<column name="dist_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="district" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="prov_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="district_pkey" type="pk-constr" table="public.district">
+		<columns names="dist_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="feedbacks_feedback_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="feedbacks" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="420" y="2740"/>
+	<column name="feedback_id" not-null="true" sequence="public.feedbacks_feedback_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="contents" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="progress" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="updated_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="comments_from_office">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="feedbacks_pkey" type="pk-constr" table="public.feedbacks">
+		<columns names="feedback_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="forest_cadastre_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="forest_cadastre" layer="0" collapse-mode="2" max-obj-count="15">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="2060"/>
+	<column name="id" not-null="true" sequence="public.forest_cadastre_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="objectid">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nomdistr">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="prov">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="objectid_1">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="category">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="class">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="code">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="canopy">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="area_ha">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="shape_leng">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="shape_area">
+		<type name="double precision" length="0"/>
+	</column>
+	<constraint name="forest_cadastre_pkey" type="pk-constr" table="public.forest_cadastre">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="lakes_all_id_0_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="lakes_all" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="1840"/>
+	<column name="id_0" not-null="true" sequence="public.lakes_all_id_0_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="area">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="nom">
+		<type name="character varying" length="16"/>
+	</column>
+	<column name="shape_leng">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="shape_area">
+		<type name="double precision" length="0"/>
+	</column>
+	<constraint name="lakes_all_pkey" type="pk-constr" table="public.lakes_all">
+		<columns names="id_0" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="mesh1" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="2440"/>
+	<column name="meshcode" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="lat0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="lat1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="mesh1_pkey" type="pk-constr" table="public.mesh1">
+		<columns names="meshcode" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="mesh2" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="2440"/>
+	<column name="meshcode" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="lat0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="lat1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="mesh2_pkey" type="pk-constr" table="public.mesh2">
+		<columns names="meshcode" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="mesh3" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1400" y="2440"/>
+	<column name="meshcode" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="lat0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="lat1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="mesh3_pkey" type="pk-constr" table="public.mesh3">
+		<columns names="meshcode" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="mesh4" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1720" y="2440"/>
+	<column name="meshcode" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="lat0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long0">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="lat1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="long1">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="mesh4_pkey" type="pk-constr" table="public.mesh4">
+		<columns names="meshcode" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="national_parks_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="national_parks" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="2160"/>
+	<column name="id" not-null="true" sequence="public.national_parks_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="name1_">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="name2">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="shape_leng">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="shape_area">
+		<type name="double precision" length="0"/>
+	</column>
+	<constraint name="national_parks_pkey" type="pk-constr" table="public.national_parks">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="parcels_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="parcels" layer="0" collapse-mode="2" max-obj-count="27">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1500" y="1840"/>
+	<column name="id" not-null="true" sequence="public.parcels_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="fid">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="OBJECTID">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="Parcel_ID">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="Village">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="Province">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="District">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="Sector">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="Cell">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="Cell_Code">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="UPI">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="Change_ID">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="Wetland">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Prev_Wet">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Wet_Part">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Start_Date">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="End_Date">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="Provisional">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="TransactionAdminDoc">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="Old_ID">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="SHAPE_Length">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="SHAPE_Area">
+		<type name="double precision" length="0"/>
+	</column>
+	<constraint name="parcels_pkey" type="pk-constr" table="public.parcels">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="province" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="160"/>
+	<column name="prov_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="prov_name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="province_pkey" type="pk-constr" table="public.province">
+		<columns names="prov_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="rivers_all_rw92_id_0_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="rivers_all_rw92" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="820" y="1840"/>
+	<column name="id_0" not-null="true" sequence="public.rivers_all_rw92_id_0_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nom">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="hierarchie">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="rivers_all_rw92_pkey" type="pk-constr" table="public.rivers_all_rw92">
+		<columns names="id_0" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="roads_all_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="roads_all" layer="0" collapse-mode="2" max-obj-count="12">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1140" y="1840"/>
+	<column name="id" not-null="true" sequence="public.roads_all_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="objectid">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="type">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="road_no">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="surface">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="source">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="captured">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="shape_leng">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="shape_le_1">
+		<type name="double precision" length="0"/>
+	</column>
+	<constraint name="roads_all_pkey" type="pk-constr" table="public.roads_all">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="rw_all_mesh_gid_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="rw_all_mesh" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="2440"/>
+	<column name="gid" not-null="true" sequence="public.rw_all_mesh_gid_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="left">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="top">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="right">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="bottom">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="population" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="rw_all_mesh_pkey" type="pk-constr" table="public.rw_all_mesh">
+		<columns names="gid" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="rwanda_dem_10m_rid_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="rwanda_dem_10m" layer="0" collapse-mode="2" max-obj-count="14">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="1840"/>
+	<column name="rid" not-null="true" sequence="public.rwanda_dem_10m_rid_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="rast">
+		<type name="raster" length="0"/>
+	</column>
+	<constraint name="enforce_height_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public.st_height(rast) = ANY (ARRAY[100, 85]))]]></expression>
+	</constraint>
+	<constraint name="enforce_max_extent_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public.st_envelope(rast) OPERATOR(public.@) '0103000020E610000001000000050000001C89F9D593F53C40606E63B446BB06C01C89F9D593F53C4006CF8BE578A3F0BFDEFC6E0F49E63E4006CF8BE578A3F0BFDEFC6E0F49E63E40606E63B446BB06C01C89F9D593F53C40606E63B446BB06C0'::public.geometry)]]></expression>
+	</constraint>
+	<constraint name="enforce_nodata_values_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public._raster_constraint_nodata_values(rast) = '{65535.0000000000}'::numeric[])]]></expression>
+	</constraint>
+	<constraint name="enforce_num_bands_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public.st_numbands(rast) = 1)]]></expression>
+	</constraint>
+	<constraint name="enforce_out_db_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public._raster_constraint_out_db(rast) = '{f}'::boolean[])]]></expression>
+	</constraint>
+	<constraint name="enforce_pixel_types_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public._raster_constraint_pixel_types(rast) = '{16BUI}'::text[])]]></expression>
+	</constraint>
+	<constraint name="enforce_same_alignment_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[public.st_samealignment(rast, '01000000006BB4CAC37AA1173F6BB4CAC37AA117BF1C89F9D593F53C4006CF8BE578A3F0BF00000000000000000000000000000000E610000001000100'::public.raster)]]></expression>
+	</constraint>
+	<constraint name="enforce_scalex_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(round((public.st_scalex(rast))::numeric, 10) = round(0.0000901442699141206, 10))]]></expression>
+	</constraint>
+	<constraint name="enforce_scaley_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(round((public.st_scaley(rast))::numeric, 10) = round('-0.0000901442699141206'::numeric, 10))]]></expression>
+	</constraint>
+	<constraint name="enforce_srid_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public.st_srid(rast) = 4326)]]></expression>
+	</constraint>
+	<constraint name="enforce_width_rast" type="ck-constr" table="public.rwanda_dem_10m">
+			<expression><![CDATA[(public.st_width(rast) = ANY (ARRAY[100, 24]))]]></expression>
+	</constraint>
+	<constraint name="rwanda_dem_10m_pkey" type="pk-constr" table="public.rwanda_dem_10m">
+		<columns names="rid" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="sector" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="560"/>
+	<column name="sect_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sector" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="prov_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dist_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="sector_pkey" type="pk-constr" table="public.sector">
+		<columns names="sect_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="statistics_mesh3" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="400" y="2440"/>
+	<column name="meshcode" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="alt_min">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="alt_mean">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="alt_median">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="alt_max">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="light_int">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="population">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="statistics_mesh3_pkey" type="pk-constr" table="public.statistics_mesh3">
+		<columns names="meshcode" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="village" layer="0" collapse-mode="2" max-obj-count="10">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="1060"/>
+	<column name="vill_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="village" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="prov_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dist_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sect_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cell_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="population" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="household" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="village_pkey" type="pk-constr" table="public.village">
+		<columns names="vill_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="cell_spatialidx" table="public.cell"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="contours_rw_spatialidx" table="public.contours_rw"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="district_spatialidx" table="public.district"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="mesh1_spatialidx" table="public.mesh1"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="mesh2_spatialidx" table="public.mesh2"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="mesh3_spatialidx" table="public.mesh3"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="mesh4_spatialidx" table="public.mesh4"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="parcels_spatialidx" table="public.parcels"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="province_spatialidx" table="public.province"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="rw_all_mesh_geom_idx" table="public.rw_all_mesh"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="rwanda_dem_10m_st_convexhull_idx" table="public.rwanda_dem_10m"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<expression><![CDATA[st_convexhull(rast)]]></expression>
+		</idxelement>
+</index>
+
+<index name="sector_spatialidx" table="public.sector"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="village_spatialidx" table="public.village"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<sequence name="chamber_chamber_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="chamber" layer="0" collapse-mode="2" max-obj-count="16">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="380" y="860"/>
+	<column name="chamber_id" not-null="true" sequence="public.chamber_chamber_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="chamber_type" not-null="true">
+		<type name="character varying" length="50"/>
+		<comment><![CDATA[Washout Chamber
+Valve Chamber
+Starting Chamber
+Collection Chamber
+Air Release Chamber]]></comment>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="chamber_size">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="material">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="status">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="is_breakpressure" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="chlorination_unit" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="chamber_pkey" type="pk-constr" table="public.chamber">
+		<columns names="chamber_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="management_management_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="management" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="940" y="320"/>
+	<column name="management_id" not-null="true" sequence="public.management_management_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="po_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="start_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="end_date">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="pkey_management" type="pk-constr" table="public.management">
+		<columns names="management_id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uniquekey_management" type="uq-constr" table="public.management">
+		<columns names="wss_id,po_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="pipeline_pipe_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="pipeline" layer="0" collapse-mode="2" max-obj-count="12">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1260" y="80"/>
+	<column name="pipe_id" not-null="true" sequence="public.pipeline_pipe_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="material">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="pipe_size">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="pressure">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="pipeline_pkey" type="pk-constr" table="public.pipeline">
+		<columns names="pipe_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="private_operator" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="940" y="140"/>
+	<column name="po_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="po_name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="po_type">
+		<type name="character varying" length="100"/>
+	</column>
+	<constraint name="pkey_po" type="pk-constr" table="public.private_operator">
+		<columns names="po_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="pumping_station_pumpingstation_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="pumping_station" layer="0" collapse-mode="2" max-obj-count="27">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1600" y="80"/>
+	<column name="pumpingstation_id" not-null="true" sequence="public.pumping_station_pumpingstation_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="status">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="head_pump">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="power_pump">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="discharge_pump">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="pump_type">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="power_source">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="no_pump">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="kva">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="no_generator" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="pump_installation_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="meter_installation_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="capacity_antihummber">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="water_meter" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="chlorination_unit" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="installation_antihummer" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="pumping_station_pkey" type="pk-constr" table="public.pumping_station">
+		<columns names="pumpingstation_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="reservoir_reservoir_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="reservoir" layer="0" collapse-mode="2" max-obj-count="19">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1160" y="1340"/>
+	<column name="reservoir_id" not-null="true" sequence="public.reservoir_reservoir_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="reservoir_type">
+		<type name="character varying" length="50"/>
+		<comment><![CDATA[Ground
+Underground
+Elevated]]></comment>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="capacity">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="material">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="water_meter" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="status">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="is_breakpressure" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="meter_installation_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="chlorination_unit" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="reservoir_pkey" type="pk-constr" table="public.reservoir">
+		<columns names="reservoir_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="status" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1120" y="1040"/>
+	<column name="code" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="status_pkey" type="pk-constr" table="public.status">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="valve_valve_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="valve" layer="0" collapse-mode="2" max-obj-count="19">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="360" y="1240"/>
+	<column name="valve_id" not-null="true" sequence="public.valve_valve_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="valve_type" not-null="true">
+		<type name="character varying" length="50"/>
+		<comment><![CDATA[Gate valve
+Air valve
+Flow control valve (FCV)
+Non return valve
+Pressure Breaker valve (PBV)
+Pressure Reducing valve (PRV)
+Pressure Sustaining valve (PSV)
+Sectioning valve
+Washout valve]]></comment>
+	</column>
+	<column name="status" not-null="true">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[1: Fully functional
+2: Partially functional
+3: Abandoned
+4: Not functional]]></comment>
+	</column>
+	<column name="opening_direction">
+		<type name="character varying" length="20"/>
+		<comment><![CDATA[Clockwise
+Anti clockwise]]></comment>
+	</column>
+	<column name="nominal_pressure">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="diameter">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="material">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="fitting_used">
+		<type name="text" length="0"/>
+	</column>
+	<column name="chamber_protected" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="valve_pkey" type="pk-constr" table="public.valve">
+		<columns names="valve_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="water_connection_temp_connection_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="water_connection" layer="0" collapse-mode="2" max-obj-count="22">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="1340"/>
+	<column name="connection_id" not-null="true" sequence="public.water_connection_temp_connection_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="connection_type">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="no_user">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="water_meter" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="status">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="meter_installation_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="connection_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="disconnection_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="customer_name">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="national_id">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="phone_number">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="meter_serialno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="water_connection_temp_pkey" type="pk-constr" table="public.water_connection">
+		<columns names="connection_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="waterficilities_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="waterfacilities" layer="0" collapse-mode="2" max-obj-count="20">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="560" y="460"/>
+	<column name="id" not-null="true" sequence="public.waterficilities_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wsf_code">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="wsf_type">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="wsf_name">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="altitude">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="serv_area_villages">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="serv_popu_personals">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="serv_popu_households">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="type_water_source">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="no_water_source">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="hand_pump_type_name">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="year_construction">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fund">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="status">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="dist_id">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="waterficilities_pkey" type="pk-constr" table="public.waterfacilities">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="watersource_watersource_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="watersource" layer="0" collapse-mode="2" max-obj-count="16">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1640" y="600"/>
+	<column name="watersource_id" not-null="true" sequence="public.watersource_watersource_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="source_type">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="discharge">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="water_meter" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="status">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="geom" not-null="true">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="chlorination_unit" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="source_protected" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="watersource_pkey" type="pk-constr" table="public.watersource">
+		<columns names="watersource_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="wss" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="640"/>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="dist_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_type" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="status">
+		<type name="character varying" length="1048"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+		<comment><![CDATA[this column shall be used for inventory report.]]></comment>
+	</column>
+	<constraint name="wss_pkey" type="pk-constr" table="public.wss">
+		<columns names="wss_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="wtp_wtp_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="wtp" layer="0" collapse-mode="2" max-obj-count="33">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1560" y="1020"/>
+	<column name="wtp_id" not-null="true" sequence="public.wtp_wtp_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="type_treatment" not-null="true">
+		<type name="character varying" length="20"/>
+		<comment><![CDATA[Rapid / Slow / Ultraviolet]]></comment>
+	</column>
+	<column name="status" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name_source">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="type_source" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="raw_water_meter" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="design_capacity" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="actual_production" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="storage_volume" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="no_reservoirs" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="working_hours">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="production_meter" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="desludge" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="presedimentation_tank" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="flocculation" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="aeration" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="sedimentation" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="filtration" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="chrolination" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="backwashing" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="frequence_backwash">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="construction_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="rehabilitation_year">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="input_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<column name="observation">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<constraint name="wtp_pkey" type="pk-constr" table="public.wtp">
+		<columns names="wtp_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="chamber_spatialidx" table="public.chamber"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="idx_valve_geom" table="public.valve"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="idx_wtp_geom" table="public.wtp"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="pipeline_spatialidx" table="public.pipeline"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="pumping_station_spatialidx" table="public.pumping_station"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="reservoir_spatialidx" table="public.reservoir"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="water_connection_spatialidx" table="public.water_connection"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="waterfacilities_spatialidx" table="public.waterfacilities"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="watersource_spatialidx" table="public.watersource"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<index name="wss_spatialidx" table="public.wss"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gist" factor="90">
+		<idxelement use-sorting="false">
+			<column name="geom"/>
+		</idxelement>
+</index>
+
+<view name="wss_view" layer="0" collapse-mode="2" max-obj-count="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="580" y="200"/>
+	<reference>
+		<expression><![CDATA[ SELECT a.wss_id,
+    a.wss_name,
+    a.dist_id,
+    a.wss_type,
+    a.status,
+    a.geom,
+    b.po_id,
+    c.po_name
+   FROM ((wss a
+     LEFT JOIN management b ON ((a.wss_id = b.wss_id)))
+     LEFT JOIN private_operator c ON ((b.po_id = c.po_id)));]]></expression>
+	<column name="wss_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_name">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="dist_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wss_type">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="status">
+		<type name="character varying" length="1048"/>
+	</column>
+	<column name="geom">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="po_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="po_name">
+		<type name="character varying" length="100"/>
+	</column>
+		<reftable name="public.management"/>
+		<reftable name="public.private_operator"/>
+		<reftable name="public.wss"/>
+	</reference>
+</view>
+
+<relationship name="rel_wss_view_management" type="reltv" layer="0"
+	 custom-color="#f33c8a"
+	 src-table="public.wss_view"
+	 dst-table="public.management"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_wss_view_private_operator" type="reltv" layer="0"
+	 custom-color="#909d83"
+	 src-table="public.wss_view"
+	 dst-table="public.private_operator"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_wss_view_wss" type="reltv" layer="0"
+	 custom-color="#f40dcf"
+	 src-table="public.wss_view"
+	 dst-table="public.wss"
+	 src-required="false" dst-required="false"/>
+
+<textbox name="basemap" layer="0" bold="true" underline="true" font-size="15">
+	<position x="40" y="1800"/>
+	<comment><![CDATA[Tables for BaseMap]]></comment>
+</textbox>
+
+<textbox name="not_using" layer="0" bold="true" underline="true" font-size="15">
+	<position x="60" y="2400"/>
+	<comment><![CDATA[Tables unused]]></comment>
+</textbox>
+
+<textbox name="wss_tables" layer="0" bold="true" underline="true" font-size="15">
+	<position x="580" y="80"/>
+	<comment><![CDATA[Tables for Water Supply Systems]]></comment>
+</textbox>
+
+<textbox name="admin_table" layer="0" bold="true" underline="true" font-size="15">
+	<position x="60" y="100"/>
+	<comment><![CDATA[Tables for Administrative Boundaries]]></comment>
+</textbox>
+
+<constraint name="cell_sect_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.sector" table="public.cell">
+	<columns names="sect_id" ref-type="src-columns"/>
+	<columns names="sect_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="dist_prov_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province" table="public.district">
+	<columns names="prov_id" ref-type="src-columns"/>
+	<columns names="prov_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="sect_dist_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.district" table="public.sector">
+	<columns names="dist_id" ref-type="src-columns"/>
+	<columns names="dist_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="vill_cell_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.cell" table="public.village">
+	<columns names="cell_id" ref-type="src-columns"/>
+	<columns names="cell_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="chamber_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.chamber">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.chamber">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="management_po_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.private_operator" table="public.management">
+	<columns names="po_id" ref-type="src-columns"/>
+	<columns names="po_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="management_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.management">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="pipe_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.pipeline">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="pump_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.pumping_station">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.pumping_station">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="reservoir_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.reservoir">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.reservoir">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="valve_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.valve">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.valve">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="conn_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.water_connection">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.water_connection">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="wsf_dist_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.district" table="public.waterfacilities">
+	<columns names="dist_id" ref-type="src-columns"/>
+	<columns names="dist_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.waterfacilities">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="watersource_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.watersource">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.watersource">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="wtp_wss_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.wss" table="public.wtp">
+	<columns names="wss_id" ref-type="src-columns"/>
+	<columns names="wss_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.status" table="public.wtp">
+	<columns names="status" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_waterfacilities_district" type="relfk" layer="0"
+	 custom-color="#ff0000"
+	 src-table="public.waterfacilities"
+	 dst-table="public.district" reference-fk="wsf_dist_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_village_cell" type="relfk" layer="0"
+	 custom-color="#ff0000"
+	 src-table="public.village"
+	 dst-table="public.cell" reference-fk="vill_cell_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_cell_sector" type="relfk" layer="0"
+	 custom-color="#ff0000"
+	 src-table="public.cell"
+	 dst-table="public.sector" reference-fk="cell_sect_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="3.92112" y="6.07983"/>
+	</label>
+</relationship>
+
+<relationship name="rel_sector_district" type="relfk" layer="0"
+	 custom-color="#ff0000"
+	 src-table="public.sector"
+	 dst-table="public.district" reference-fk="sect_dist_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_district_province" type="relfk" layer="0"
+	 custom-color="#ff0000"
+	 src-table="public.district"
+	 dst-table="public.province" reference-fk="dist_prov_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_management_private_operator" type="relfk" layer="0"
+	 custom-color="#ffaa00"
+	 src-table="public.management"
+	 dst-table="public.private_operator" reference-fk="management_po_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-9.81754" y="-2.72017"/>
+	</label>
+</relationship>
+
+<relationship name="rel_management_wss" type="relfk" layer="0"
+	 custom-color="#ffaa00"
+	 src-table="public.management"
+	 dst-table="public.wss" reference-fk="management_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_chamber_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.chamber"
+	 dst-table="public.wss" reference-fk="chamber_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_reservoir_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.reservoir"
+	 dst-table="public.wss" reference-fk="reservoir_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_pipeline_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.pipeline"
+	 dst-table="public.wss" reference-fk="pipe_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_pumping_station_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.pumping_station"
+	 dst-table="public.wss" reference-fk="pump_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_watersource_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.watersource"
+	 dst-table="public.wss" reference-fk="watersource_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_valve_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.valve"
+	 dst-table="public.wss" reference-fk="valve_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_water_connection_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.water_connection"
+	 dst-table="public.wss" reference-fk="conn_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_wtp_wss" type="relfk" layer="0"
+	 custom-color="#0000ff"
+	 src-table="public.wtp"
+	 dst-table="public.wss" reference-fk="wtp_wss_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_chamber_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.chamber"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_valve_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.valve"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_water_connection_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.water_connection"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_wtp_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.wtp"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_reservoir_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.reservoir"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_watersource_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.watersource"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_pumping_station_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.pumping_station"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_waterfacilities_status" type="relfk" layer="0"
+	 custom-color="#55aa00"
+	 src-table="public.waterfacilities"
+	 dst-table="public.status" reference-fk="status_fk"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
